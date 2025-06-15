@@ -1,0 +1,9 @@
+<div class="card">
+  <img [src]="backendUrl + (mascota.imagenes?.[0]?.urlImagen)" style="width: 100%">
+  <div class="card__content">
+    <p class="card__title">{{mascota.nombre}}</p>
+    <p class="card__description">{{mascota.edad}} años</p>
+    <p class="card__description">{{mascota.descripcion}}</p>
+    <button [routerLink]="['/detalle-mascota', mascota.id]" type="button" class="btn-naranja">¡Adóptame!</button>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+/* Formulario de login adaptado */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 350px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 3rem auto 4rem auto;
+}
+
+.login-form .title {
+  font-size: 28px;
+  color: #fc713e;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+/* Estructura para los inputs del login */
+.login-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.login-form .form-group label {
+  font-size: 0.9em;
+  color: #333;
+  font-weight: 500;
+}
+
+.login-form .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+  outline: none;
+  font-size: 0.9em;
+  transition: border-color 0.3s ease;
+}
+
+.login-form .form-group input:focus {
+  border-color: #fc713e;
+}
+
+.login-form .form-group input:valid {
+  border-color: #fc713e;
+}
+
+/* Botón de submit del login */
+.login-form .submit {
+  border: none;
+  outline: none;
+  background-color: #fc713e;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form .submit:hover {
+  background-color: rgb(255, 134, 48);
+}
+
+/* Centrar el formulario de login */
+.center-wrapper-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+
+.error-message {
+  color: #d32f2f;
+  background-color: #ffe6e6;
+  border: 1px solid #d32f2f;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.success-message {
+  color: #388e3c;
+  background-color: #e6ffe6;
+  border: 1px solid #388e3c;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+

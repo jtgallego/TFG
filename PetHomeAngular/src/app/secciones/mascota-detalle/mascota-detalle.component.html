@@ -1,0 +1,90 @@
+<div class="tarjeta-mascota">
+  <div class="galeria">
+    <div class="imagen-principal">
+     <img [src]="backendUrl + (mascota.imagenes?.[0]?.urlImagen)" style="width: 100%; height: auto;">
+    </div>
+    
+  </div>
+
+  <div class="info-detalle">
+    <div class="info-principal">
+      <h1>{{ mascota.nombre }}</h1>
+      <p class="subtitulo">{{ mascota.especie }} | {{ mascota.edad }} años | {{ mascota.raza }} | {{mascota.genero}}</p>
+      <p class="descripcion">{{ mascota.descripcion }}</p>
+      <p class="descripcion">{{ mascota.localidad }}</p>
+
+      <div class="info-extra">
+        <div>
+          <h3>Características</h3>
+          <p>{{ mascota.caracteristicas || 'No especificadas.' }}</p>
+        </div>
+        <div>
+          <h3>Salud</h3>
+          <p>{{ mascota.salud || 'No especificada.' }}</p>
+        </div>
+        <div>
+          <h3>Localidad</h3>
+          <p>{{ mascota.localidad || 'Sin detalles adicionales.' }}</p>
+        </div>
+      </div>
+    </div>
+
+
+    @if (esOrganizacion) {
+
+      <div class="info-lateral">
+      <div class="adopcion-box">
+        <p>¿Quieres editar la informacion de {{ mascota.nombre }}?</p>
+        
+        
+        <button [routerLink]="['/editar-mascotas', mascota.id]" class="btn-naranja">Editar {{ mascota.nombre }}</button>
+        
+      </div>
+
+      <div class="fundacion-box">
+        <p><strong>¿Deseas eliminar a {{ mascota.nombre }}?</strong></p>
+        <p>Recuerda que una vez eliminada no podrás recuperarla.</p>
+        <button class="btn-naranja" (click)="eliminarMascota(mascota.id)">Eliminar {{ mascota.nombre }}</button>
+      </div>
+    </div>
+
+    }@else {
+      <div class="info-lateral">
+      <div class="adopcion-box">
+        <p>¿Quieres adoptar a {{ mascota.nombre }}?</p>
+        @if(estaLogueado())
+        {
+        <button class="btn-naranja">Contacto</button>
+        }@else{
+        <button class="btn-naranja" [routerLink]="['/register']">Registrarse</button>
+        }
+        
+      </div>
+
+      <div class="fundacion-box">
+        <p><strong>{{ mascota.protectora.nombre }}</strong></p>
+        <p>{{ mascota.protectora.direccion }}</p>
+        <p>{{ mascota.protectora.email }}</p>
+        <button [routerLink]="['/detalle-organizacion', mascota.protectora.id]" class="btn-naranja">Ver {{mascotas.length}} mascotas →</button>
+      </div>
+    </div>
+    }
+
+    
+  </div>
+</div>
+
+
+<div class="tarjeta-mascota">
+  <h4>Otras mascotas de la protectora {{ mascota.protectora.nombre }}</h4>
+  <div class="row g-4 row-cols-1 row-cols-md-2 row-cols-lg-3">
+            @for (mascota of mascotas.slice(-3); track $index) {
+            <div class="col">
+              <app-mascota-card [mascota]="mascota"/>
+            </div>
+          
+
+          }
+         </div>
+</div>
+  
