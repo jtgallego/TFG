@@ -1,27 +1,15 @@
-FROM php:8.2-apache
+FROM php:8.1-apache
 
-# Instala utilidades y extensiones necesarias para Composer
-RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    zip \
-    libzip-dev \
-    && docker-php-ext-install pdo pdo_mysql zip
+# Instala extensiones necesarias, etc. (si no lo has hecho ya)
 
-# Habilita el mod_rewrite para Symfony
+COPY apache.conf /etc/apache2/sites-available/000-default.conf
+
 RUN a2enmod rewrite
 
-# Copia Composer desde la imagen oficial
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Directorio de trabajo
 WORKDIR /var/www/html
 
-# Copia tu código
 COPY . .
 
-# Instala dependencias PHP
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+RUN composer install
 
-# Permisos para Apache
 RUN chown -R www-data:www-data /var/www/html
