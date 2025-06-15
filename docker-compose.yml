@@ -26,7 +26,7 @@ services:
 
   backend:
     build:
-      context: ./symfony-backend
+      context: ./pet-home-symfony
     container_name: symfony
     ports:
       - "8000:8000"
@@ -35,18 +35,18 @@ services:
     environment:
       DATABASE_URL: "mysql://symfony:symfony123@mysql:3306/petswap"
     volumes:
-      - ./symfony-backend:/app
+      - ./pet-home-symfony:/app
 
   frontend:
     build:
-      context: ./angular-frontend
+      context: ./PetHomeAngular
     container_name: angular
     ports:
       - "4200:4200"
     depends_on:
       - backend
     volumes:
-      - ./angular-frontend:/app
+      - ./PetHomeAngular:/app
 
 volumes:
   mysql-data:
