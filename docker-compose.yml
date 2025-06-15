@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: petswap
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: symfony123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root
+
+  backend:
+    build:
+      context: ./symfony-backend
+    container_name: symfony
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_URL: "mysql://symfony:symfony123@mysql:3306/petswap"
+    volumes:
+      - ./symfony-backend:/app
+
+  frontend:
+    build:
+      context: ./angular-frontend
+    container_name: angular
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+    volumes:
+      - ./angular-frontend:/app
+
+volumes:
+  mysql-data:
