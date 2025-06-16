@@ -14,7 +14,7 @@ FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copia los archivos generados del build
-COPY --from=build /app/dist/pethome /usr/share/nginx/html
+COPY --from=build /app/dist/pet-home /usr/share/nginx/html
 
 # Expone el puerto 80
 EXPOSE 80
